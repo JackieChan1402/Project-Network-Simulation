@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
     Config::SetDefault("ns3::WifiRemoteStationManager::RtsCtsThreshold", StringValue("2000"));
 
-    for (uint32_t numNodes = 2; numNodes <= 30; numNodes += 2) {
+    for (uint32_t numNodes = 2; numNodes <= 30; numNodes += 1) {
         std::cout << "Running simulation with " << numNodes << " nodes" << std::endl;
 
         NodeContainer nodes;
