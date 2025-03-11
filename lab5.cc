@@ -9,6 +9,14 @@
 
 using namespace ns3;
 
+/**
+@Params:
+    - txPower: 
+        + represents the transmission power of a wireless node
+        + It determines how strong the radio signal is when being transmitted
+        + A higher transmission power allows signals to travel further and penetrate obstacles better.
+ */
+
 // Function to calculate packet delivery ratio
 double CalculatePDR(uint64_t received, uint64_t sent) {
   if (sent == 0) return 0.0;
