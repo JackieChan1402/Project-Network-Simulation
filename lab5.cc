@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
   double interval = 1.0;       // seconds
   bool enableRtsCts = false;   // disable RTC/CTS
   double txPower = 16.0;       // dBm
-  uint32_t rtsThreshold = 65535; // Effectively disable RTS/CTS
+  uint32_t rtsThreshold = 65535;
   double simTime = 10;      // seconds
   bool tracing = false;
 
@@ -59,13 +59,20 @@ int main(int argc, char* argv[]) {
     adhocNodes.Create(nNodes);
 
     // Set up Wi-Fi network
+    /* WIFI_STANDARD_80211g properties:
+        Frequency Band: 2.4 GHz
+        Max Data Rate: 	54 Mbps 
+    */
     WifiHelper wifi;
     wifi.SetStandard(WIFI_STANDARD_80211g);
 
     // Set up physical layer
+    // models the physical layer (radio transmission).
     YansWifiPhyHelper wifiPhy;
+    // defines the wireless channel (signal propagation).
     YansWifiChannelHelper wifiChannel = YansWifiChannelHelper::Default();
     wifiPhy.SetChannel(wifiChannel.Create());
+    // Wi-Fi signal strength and range.
     wifiPhy.Set("TxPowerStart", DoubleValue(txPower));
     wifiPhy.Set("TxPowerEnd", DoubleValue(txPower));
 
@@ -102,7 +109,7 @@ int main(int argc, char* argv[]) {
     Ipv4InterfaceContainer interfaces = ipv4.Assign(devices);
 
     // Set up applications - each node sends to random destination
-    uint16_t port = 9;
+    uint16_t port = 50000;
     ApplicationContainer sinkApps;
     ApplicationContainer sourceApps;
     
